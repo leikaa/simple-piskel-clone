@@ -1,15 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700&display=swap">
-    <script type="text/javascript" src="./polyfill.js"></script>
-    <script type="text/javascript" src="./main.js"></script>
-    <title>Simple-piskel-clone</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700&display=swap">
+  <link rel="stylesheet" href="./style.css">
+  <script type="text/javascript" src="./polyfill.js"></script>
+  <script type="text/javascript" src="./main.js"></script>
+  <title>Simple-piskel-clone</title>
 </head>
 <body>
+<div class="wrapper">
+  <div class="top-menu">
+    <div class="top-menu__title">Piskel</div>
+    <div class="top-menu__filename">New Piskel*</div>
+    <div class="top-menu__sprite btn-menu">Create Sprite</div>
+    <div class="top-menu__sign btn-menu">Sign In</div>
+  </div>
+  <div class="work-area">
+    <div class="work-area-left-panel-block">
+      <ul class="work-area-left-panel-block-size">
+        <li class="work-area-left-panel-block-size__item">1px</li>
+        <li class="work-area-left-panel-block-size__item">2px</li>
+        <li class="work-area-left-panel-block-size__item">3px</li>
+        <li class="work-area-left-panel-block-size__item">4px</li>
+      </ul>
+      <ul class="work-area-left-panel-block-tools">
+        <li class="work-area-left-panel-block-tools__item active" data-tool="pencil">Pencil</li>
+        <li class="work-area-left-panel-block-tools__item" data-tool="stroke">Stroke</li>
+        <li class="work-area-left-panel-block-tools__item" data-tool="bucket">Paint bucket</li>
+        <li class="work-area-left-panel-block-tools__item" data-tool="bucket-all">Paint bucket-all</li>
+        <li class="work-area-left-panel-block-tools__item" data-tool="eraser">Eraser</li>
+        <li class="work-area-left-panel-block-tools__item" data-tool="picker">Choose color</li>
+      </ul>
+      <ul class="work-area-left-panel-block-colors">
+        <li class="work-area-left-panel-block-colors__item">
+          <span class="work-area-left-panel-block-colors__color"></span>
+          <span>Primary color</span>
+        </li>
+        <li class="work-area-left-panel-block-colors__item">
+          <span class="work-area-left-panel-block-colors__color"></span>
+          <span>Secondary color</span>
+        </li>
+      </ul>
+    </div>
+    <div class="work-area-left-frame-block">
+    </div>
+    <div class="work-area-canvas-block">
+      <canvas class="work-area-canvas-block__canvas" width="512" height="512"></canvas>
+    </div>
+    <div class="work-area-right-block">
+    </div>
+  </div>
+</div>
 </body>
 </html>
