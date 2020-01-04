@@ -1,3 +1,6 @@
+# built files
+dist
+
 #IDE
 .idea
 
