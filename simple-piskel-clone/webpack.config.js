@@ -5,7 +5,7 @@ const HtmlPlugin = require('html-webpack-plugin');
 module.exports = {
     entry: {
         polyfill: '@babel/polyfill',
-        main: './src/screens/canvas/index.js'
+        main: './src/app.js'
     },
     output: {
         path: path.resolve(__dirname, 'dist'),

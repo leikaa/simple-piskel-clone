@@ -14,42 +14,44 @@
 <body>
 <div class="wrapper">
   <div class="top-menu">
-    <div class="top-menu__title">Piskel</div>
+    <a href="https://www.piskelapp.com/" class="top-menu__title">Piskel</a>
     <div class="top-menu__filename">New Piskel*</div>
-    <div class="top-menu__sprite btn-menu">Create Sprite</div>
-    <div class="top-menu__sign btn-menu">Sign In</div>
+    <div class="top-menu__buttons">
+      <div class="top-menu__sprite btn-menu">Create Sprite</div>
+      <div class="top-menu__sign btn-menu">Sign In</div>
+    </div>
   </div>
   <div class="work-area">
     <div class="work-area-left-panel-block">
       <ul class="work-area-left-panel-block-size">
-        <li class="work-area-left-panel-block-size__item">1px</li>
-        <li class="work-area-left-panel-block-size__item">2px</li>
-        <li class="work-area-left-panel-block-size__item">3px</li>
-        <li class="work-area-left-panel-block-size__item">4px</li>
+        <li class="work-area-left-panel-block-size__item selected" data-size="1"></li>
+        <li class="work-area-left-panel-block-size__item" data-size="2"></li>
+        <li class="work-area-left-panel-block-size__item" data-size="3"></li>
+        <li class="work-area-left-panel-block-size__item" data-size="4"></li>
       </ul>
       <ul class="work-area-left-panel-block-tools">
-        <li class="work-area-left-panel-block-tools__item active" data-tool="pencil">Pencil</li>
-        <li class="work-area-left-panel-block-tools__item" data-tool="stroke">Stroke</li>
-        <li class="work-area-left-panel-block-tools__item" data-tool="bucket">Paint bucket</li>
-        <li class="work-area-left-panel-block-tools__item" data-tool="bucket-all">Paint bucket-all</li>
-        <li class="work-area-left-panel-block-tools__item" data-tool="eraser">Eraser</li>
-        <li class="work-area-left-panel-block-tools__item" data-tool="picker">Choose color</li>
+        <li class="work-area-left-panel-block-tools__item selected" data-tool="pencil" data-tip="Pencil"></li>
+        <li class="work-area-left-panel-block-tools__item" data-tool="stroke" data-tip="Stroke"></li>
+        <li class="work-area-left-panel-block-tools__item" data-tool="bucket" data-tip="Paint bucket"></li>
+        <li class="work-area-left-panel-block-tools__item" data-tool="bucket-all" data-tip="Paint bucket-all"></li>
+        <li class="work-area-left-panel-block-tools__item" data-tool="eraser" data-tip="Eraser"></li>
+        <li class="work-area-left-panel-block-tools__item" data-tool="picker" data-tip="Choose color"></li>
       </ul>
       <ul class="work-area-left-panel-block-colors">
-        <li class="work-area-left-panel-block-colors__item">
-          <span class="work-area-left-panel-block-colors__color"></span>
-          <span>Primary color</span>
-        </li>
-        <li class="work-area-left-panel-block-colors__item">
-          <span class="work-area-left-panel-block-colors__color"></span>
-          <span>Secondary color</span>
-        </li>
+        <li class="work-area-left-panel-block-colors__item" data-tip="Primary color"></li>
+        <li class="work-area-left-panel-block-colors__item" data-tip="Secondary color"></li>
+        <li class="work-area-left-panel-block-colors__item" data-tip="Swap colors"></li>
       </ul>
     </div>
     <div class="work-area-left-frame-block">
+      <ul class="work-area-left-frame-block-list">
+        <li class="work-area-left-frame-block-list__item"></li>
+      </ul>
     </div>
     <div class="work-area-canvas-block">
-      <canvas class="work-area-canvas-block__canvas" width="512" height="512"></canvas>
+      <div class="work-area-canvas-block__canvas-wrapper">
+        <canvas class="work-area-canvas-block__canvas" width="128" height="128"></canvas>
+      </div>
     </div>
     <div class="work-area-right-block">
     </div>
