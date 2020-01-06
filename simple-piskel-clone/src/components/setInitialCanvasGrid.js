@@ -1,8 +1,5 @@
-export default () => {
-  const canvasFrameSize = 128;
-  const defaultColor = 'transparent';
-  const columns = [];
-  const pixelSize = 4;
+export default (columns, defaultColor, pixelSize, canvasFrameSize) => {
+  columns = [];
   const columnsCount = canvasFrameSize / pixelSize;
   const rowsCount = canvasFrameSize / pixelSize;
 

@@ -3,23 +3,44 @@ import getCanvasSize from './helpers/getCanvasSize';
 import debounce from './helpers/debounce';
 import changeToolOnClick from './helpers/changeToolOnClick';
 import changePixelSizeOnClick from './helpers/changePixelSizeOnClick';
-// import setInitialCanvasGrid from './components/setInitialCanvasGrid';
-
-let tool = 'pencil';
-let pixelSize = '1';
+import changeCanvasSizeOnClick from './helpers/changeCanvasSizeOnClick';
+import setInitialCanvasGrid from './components/setInitialCanvasGrid';
+import drawCurrentPixel from './components/drawPixel';
 
 window.onload = () => {
+  let columns = [];
+  let tool = 'pencil';
+  let pixelSize = '1';
+  let canvasSize = '32';
+  let draw = false;
+  const canvasFrameSize = '128';
+  const defaultColor = '#000';
+  const colorToFillTemplate = defaultColor;
   const ulFrameList = document.querySelector('.work-area-left-frame-block-list');
-  getCanvasSize();
+  const canvas = document.querySelector('.work-area-canvas-block__canvas');
+  const ctx = canvas.getContext('2d');
+  const mouseCoords = { x: 0, y: 0 };
+
+  // set initial canvas grid
+  columns = setInitialCanvasGrid(columns, defaultColor, pixelSize, canvasFrameSize);
+
+  // get main canvas size according to window resize and choosen frame size options
+  let currentCanvasResizedSize = getCanvasSize();
+  const getCanvasResizeCoefficient = (currentCanvasResizedSize, canvasFrameSize) => currentCanvasResizedSize / canvasFrameSize;
+  let canvasResizeCoefficient = getCanvasResizeCoefficient(currentCanvasResizedSize, canvasFrameSize);
+
+  const getCanvasFrameCoefficient = (canvasSize, canvasFrameSize) => canvasFrameSize / canvasSize;
+  let canvasFrameCoefficient = getCanvasFrameCoefficient(canvasSize, canvasFrameSize);
 
   window.addEventListener('resize', debounce(() => {
-    getCanvasSize();
+    currentCanvasResizedSize = getCanvasSize();
+    canvasResizeCoefficient = getCanvasResizeCoefficient(currentCanvasResizedSize, canvasFrameSize);
   }));
 
+  // set active tools / canvas size / pixel size
   document.querySelectorAll('.work-area-left-panel-block-size__item').forEach((value) => {
     value.addEventListener('click', function onPixelSizeItemClick() {
       pixelSize = changePixelSizeOnClick(this);
-      console.log(pixelSize);
     });
   });
 
@@ -30,9 +51,46 @@ window.onload = () => {
     });
   });
 
+  document.querySelectorAll('.work-area-right-block__resize-btns-item').forEach((value) => {
+    value.addEventListener('click', function onCanvasSizeItemClick() {
+      canvasSize = changeCanvasSizeOnClick(this);
+      canvasFrameCoefficient = getCanvasFrameCoefficient(canvasSize, canvasFrameSize);
+    });
+  });
+
+  // add additional frames
   document.querySelector('.work-area-left-frame-block__add-frame').addEventListener('click', () => {
     const liAdditionalFrame = document.createElement('li');
     liAdditionalFrame.className = 'work-area-left-frame-block-list__item';
     ulFrameList.appendChild(liAdditionalFrame);
+  });
+
+  // draw according to tools
+  const drawPixel = (e) => {
+    drawCurrentPixel(e, ctx, columns, mouseCoords, canvasResizeCoefficient, pixelSize, colorToFillTemplate, canvasFrameCoefficient);
+  };
+
+  canvas.addEventListener('click', (e) => {
+    if (tool === 'pencil') {
+      drawPixel(e);
+    }
+  });
+
+  canvas.addEventListener('mousedown', () => {
+    if (tool === 'pencil') {
+      draw = true;
+    }
+  });
+
+  canvas.addEventListener('mousemove', (e) => {
+    if (tool === 'pencil' && draw === true) {
+      drawPixel(e);
+    }
+  });
+
+  canvas.addEventListener('mouseup', () => {
+    if (tool === 'pencil') {
+      draw = false;
+    }
   });
 };

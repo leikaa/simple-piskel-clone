@@ -15,6 +15,8 @@ module.exports = {
         "no-undef": "off",
         "no-new": "off",
         "camelcase": "off",
-        "prefer-destructuring": "off"
+        "prefer-destructuring": "off",
+        "operator-assignment": "off",
+        "no-param-reassign": "off"
     }
 };

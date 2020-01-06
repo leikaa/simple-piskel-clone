@@ -357,6 +357,8 @@ body {
 }
 
 .work-area-right-block__resize-btns-item {
+  box-sizing: border-box;
+  border: 1px solid #444;
   width: 30%;
 }
 

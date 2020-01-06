@@ -7,5 +7,5 @@ export default () => {
   canvasWrapper.style.height = ''.concat(canvasSize, 'px');
   canvasWrapper.style.width = ''.concat(canvasSize, 'px');
 
-  return true;
+  return canvasSize;
 };
