@@ -243,14 +243,18 @@ body {
   background-color: #fff;
 }
 
-.work-area-left-panel-block-colors__item:nth-child(3) {
+.work-area-left-panel-block-colors__swap-item {
   position: absolute;
-  top: 57px;
+  top: 60px;
   left: 35px;
   height: 20px;
   width: 20px;
   border: 0;
   background: url("./images/icons.png") no-repeat -274px -222px;
+}
+
+.work-area-left-panel-block-colors__swap-item:hover {
+  cursor: pointer;
 }
 
 .work-area-left-frame-block {
