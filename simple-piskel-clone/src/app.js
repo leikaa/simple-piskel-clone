@@ -4,9 +4,10 @@ import debounce from './helpers/debounce';
 import changeToolOnClick from './helpers/changeToolOnClick';
 import changePixelSizeOnClick from './helpers/changePixelSizeOnClick';
 import changeCanvasSizeOnClick from './helpers/changeCanvasSizeOnClick';
-import setInitialCanvasGrid from './components/setInitialCanvasGrid';
 import drawCurrentPixel from './helpers/drawPixel';
-import { getLmbColor, getRmbColor, swapColors } from './helpers/colorsHelper';
+import getPixelColor from './helpers/getPixelColor';
+import { openColorPalette, swapColors, changeColorFromPalette } from './helpers/colorsHelper';
+import setInitialCanvasGrid from './components/setInitialCanvasGrid';
 
 window.onload = () => {
   let columns = [];
@@ -15,10 +16,12 @@ window.onload = () => {
   let canvasSize = '32';
   let draw = false;
   const canvasFrameSize = '128';
+  const defaultColor = '#c4c4c4';
   const ulFrameList = document.querySelector('.work-area-left-frame-block-list');
   const canvas = document.querySelector('.work-area-canvas-block__canvas');
   const ctx = canvas.getContext('2d');
   const mouseCoords = { x: 0, y: 0 };
+  let mouseButton = 'lmb';
 
   const LMB_KEYCODE = 1;
   const RMB_KEYCODE = 3;
@@ -56,7 +59,6 @@ window.onload = () => {
   document.querySelectorAll('.work-area-left-panel-block-tools__item').forEach((value) => {
     value.addEventListener('click', function onToolsItemClick() {
       tool = changeToolOnClick(this);
-      console.log(tool);
     });
   });
 
@@ -68,27 +70,32 @@ window.onload = () => {
   });
 
   // add additional frames
-  document.querySelector('.work-area-left-frame-block__add-frame').addEventListener('click', () => {
+  document.querySelector('.js-add-frame').addEventListener('click', () => {
     const liAdditionalFrame = document.createElement('li');
     liAdditionalFrame.className = 'work-area-left-frame-block-list__item';
     ulFrameList.appendChild(liAdditionalFrame);
   });
 
   // colors section
-  document.querySelectorAll('.work-area-left-panel-block-colors__item').forEach((value) => {
-    value.addEventListener('contextmenu', function onColorItemClick(e) {
-      e.preventDefault();
-      getRmbColor(this, colorToFillTemplate, colorSet);
-    });
+  document.querySelector('.js-lmb').addEventListener('click', function onColorItemClick() {
+    mouseButton = this.getAttribute('data-button');
+    openColorPalette(this, mouseButton);
   });
 
-  document.querySelectorAll('.work-area-left-panel-block-colors__item').forEach((value) => {
-    value.addEventListener('click', function onColorItemClick() {
-      getLmbColor(this, colorToFillTemplate, colorSet);
-    });
+  document.querySelector('.js-lmb-color-picker').addEventListener('change', function onColorChange() {
+    changeColorFromPalette(colorSet, this, mouseButton);
   });
 
-  document.querySelector('.work-area-left-panel-block-colors__swap-item').addEventListener('click', () => {
+  document.querySelector('.js-rmb').addEventListener('click', function onColorItemClick() {
+    mouseButton = this.getAttribute('data-button');
+    openColorPalette(this, mouseButton);
+  });
+
+  document.querySelector('.js-rmb-color-picker').addEventListener('change', function onColorChange() {
+    changeColorFromPalette(colorSet, this, mouseButton);
+  });
+
+  document.querySelector('.js-swap').addEventListener('click', () => {
     swapColors(colorSet);
   });
 
@@ -102,6 +109,11 @@ window.onload = () => {
     if (tool === 'pencil') {
       drawPixel(e, colorToFillTemplate);
     }
+    if (tool === 'picker') {
+      const currentPixelColor = getPixelColor(e, ctx, mouseCoords, defaultColor, canvasResizeCoefficient);
+      colorSet.lmb = currentPixelColor;
+      document.querySelector('.js-lmb').style.setProperty('background-color', currentPixelColor);
+    }
   });
 
   canvas.addEventListener('contextmenu', (e) => {
@@ -109,6 +121,11 @@ window.onload = () => {
     colorToFillTemplate = colorSet.rmb;
     if (tool === 'pencil') {
       drawPixel(e, colorToFillTemplate);
+    }
+    if (tool === 'picker') {
+      const currentPixelColor = getPixelColor(e, ctx, mouseCoords, defaultColor, canvasResizeCoefficient);
+      colorSet.rmb = currentPixelColor;
+      document.querySelector('.js-rmb').style.setProperty('background-color', currentPixelColor);
     }
   });
 
