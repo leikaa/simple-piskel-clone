@@ -5,6 +5,7 @@ import changeToolOnClick from './helpers/changeToolOnClick';
 import changePixelSizeOnClick from './helpers/changePixelSizeOnClick';
 import changeCanvasSizeOnClick from './helpers/changeCanvasSizeOnClick';
 import drawCurrentPixel from './helpers/drawPixel';
+import clearCurrentPixel from './helpers/clearCurrentPixel';
 import getPixelColor from './helpers/getPixelColor';
 import { openColorPalette, swapColors, changeColorFromPalette } from './helpers/colorsHelper';
 import setInitialCanvasGrid from './components/setInitialCanvasGrid';
@@ -15,6 +16,7 @@ window.onload = () => {
   let pixelSize = '1';
   let canvasSize = '32';
   let draw = false;
+  let clear = false;
   const canvasFrameSize = '128';
   const defaultColor = '#c4c4c4';
   const ulFrameList = document.querySelector('.work-area-left-frame-block-list');
@@ -30,7 +32,6 @@ window.onload = () => {
     lmb: window.getComputedStyle(document.querySelector('.js-lmb')).getPropertyValue('background-color'),
     rmb: window.getComputedStyle(document.querySelector('.js-rmb')).getPropertyValue('background-color'),
   };
-
   let colorToFillTemplate = colorSet.lmb;
 
   // set initial canvas grid
@@ -104,6 +105,10 @@ window.onload = () => {
     drawCurrentPixel(e, ctx, columns, mouseCoords, canvasResizeCoefficient, pixelSize, colorToFillTemplate, canvasFrameCoefficient);
   };
 
+  const clearPixel = (e) => {
+    clearCurrentPixel(e, ctx, columns, mouseCoords, canvasResizeCoefficient, pixelSize, canvasFrameCoefficient);
+  };
+
   canvas.addEventListener('click', (e) => {
     colorToFillTemplate = colorSet.lmb;
     if (tool === 'pencil') {
@@ -113,6 +118,9 @@ window.onload = () => {
       const currentPixelColor = getPixelColor(e, ctx, mouseCoords, defaultColor, canvasResizeCoefficient);
       colorSet.lmb = currentPixelColor;
       document.querySelector('.js-lmb').style.setProperty('background-color', currentPixelColor);
+    }
+    if (tool === 'eraser') {
+      clearPixel(e);
     }
   });
 
@@ -133,6 +141,9 @@ window.onload = () => {
     if (tool === 'pencil') {
       draw = true;
     }
+    if (tool === 'eraser') {
+      clear = true;
+    }
   });
 
   canvas.addEventListener('mousemove', (e) => {
@@ -144,11 +155,17 @@ window.onload = () => {
     if (tool === 'pencil' && draw === true) {
       drawPixel(e, colorToFillTemplate);
     }
+    if (tool === 'eraser' && clear === true) {
+      clearPixel(e);
+    }
   });
 
   canvas.addEventListener('mouseup', () => {
     if (tool === 'pencil') {
       draw = false;
+    }
+    if (tool === 'eraser') {
+      clear = false;
     }
   });
 };
