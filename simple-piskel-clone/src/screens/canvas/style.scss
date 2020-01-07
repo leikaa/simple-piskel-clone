@@ -269,6 +269,7 @@ body {
   margin-bottom: 10px;
   border: 3px solid #444;
   border-radius: 3px;
+  background-image: url(./images/canvas_bg.png);
 }
 
 .work-area-left-frame-block__add-frame {
@@ -403,4 +404,8 @@ body {
   opacity: 0.4;
   background-color: #3a3a3a;
   cursor: initial;
+}
+
+.work-area-left-frame-block__add-frame.disabled {
+  background-color: #444;
 }
