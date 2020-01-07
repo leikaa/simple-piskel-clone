@@ -5,6 +5,7 @@ import changeToolOnClick from './helpers/changeToolOnClick';
 import changePixelSizeOnClick from './helpers/changePixelSizeOnClick';
 import changeCanvasSizeOnClick from './helpers/changeCanvasSizeOnClick';
 import drawCurrentPixel from './helpers/drawPixel';
+import { startDrawStroke, moveDrawStroke, stopDrawStroke } from './helpers/drawStrokeLine';
 import clearCurrentPixel from './helpers/clearCurrentPixel';
 import getPixelColor from './helpers/getPixelColor';
 import { openColorPalette, swapColors, changeColorFromPalette } from './helpers/colorsHelper';
@@ -23,7 +24,9 @@ window.onload = () => {
   const canvas = document.querySelector('.work-area-canvas-block__canvas');
   const ctx = canvas.getContext('2d');
   const mouseCoords = { x: 0, y: 0 };
+  let currentStartCoords = { x: 0, y: 0 };
   let mouseButton = 'lmb';
+  let imageData = '';
 
   const LMB_KEYCODE = 1;
   const RMB_KEYCODE = 3;
@@ -105,6 +108,19 @@ window.onload = () => {
     drawCurrentPixel(e, ctx, columns, mouseCoords, canvasResizeCoefficient, pixelSize, colorToFillTemplate, canvasFrameCoefficient);
   };
 
+  const startDrawStrokeLine = (e, colorToFillTemplate) => {
+    currentStartCoords = startDrawStroke(e, ctx, columns, mouseCoords, canvasResizeCoefficient, pixelSize, colorToFillTemplate, canvasFrameCoefficient);
+    imageData = ctx.getImageData(0, 0, currentCanvasResizedSize, currentCanvasResizedSize);
+  };
+
+  const moveDrawStrokeLine = (e, colorToFillTemplate, imageData, currentStartCoords) => {
+    moveDrawStroke(e, ctx, columns, mouseCoords, canvasResizeCoefficient, pixelSize, colorToFillTemplate, canvasFrameCoefficient, imageData, currentStartCoords);
+  };
+
+  const stopDrawStrokeLine = (e, colorToFillTemplate) => {
+    stopDrawStroke(e, ctx, columns, mouseCoords, canvasResizeCoefficient, pixelSize, colorToFillTemplate, canvasFrameCoefficient);
+  };
+
   const clearPixel = (e) => {
     clearCurrentPixel(e, ctx, columns, mouseCoords, canvasResizeCoefficient, pixelSize, canvasFrameCoefficient);
   };
@@ -137,9 +153,13 @@ window.onload = () => {
     }
   });
 
-  canvas.addEventListener('mousedown', () => {
+  canvas.addEventListener('mousedown', (e) => {
     if (tool === 'pencil') {
       draw = true;
+    }
+    if (tool === 'stroke') {
+      draw = true;
+      startDrawStrokeLine(e, colorToFillTemplate);
     }
     if (tool === 'eraser') {
       clear = true;
@@ -155,14 +175,22 @@ window.onload = () => {
     if (tool === 'pencil' && draw === true) {
       drawPixel(e, colorToFillTemplate);
     }
+    if (tool === 'stroke' && draw === true) {
+      // TODO придумать как сохранять первоначальные координаты и состояние канваса
+      // moveDrawStrokeLine(e, colorToFillTemplate, imageData, currentStartCoords);
+    }
     if (tool === 'eraser' && clear === true) {
       clearPixel(e);
     }
   });
 
-  canvas.addEventListener('mouseup', () => {
+  canvas.addEventListener('mouseup', (e) => {
     if (tool === 'pencil') {
       draw = false;
+    }
+    if (tool === 'stroke') {
+      draw = false;
+      stopDrawStrokeLine(e, colorToFillTemplate);
     }
     if (tool === 'eraser') {
       clear = false;

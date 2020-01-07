@@ -17,6 +17,7 @@ module.exports = {
         "camelcase": "off",
         "prefer-destructuring": "off",
         "operator-assignment": "off",
-        "no-param-reassign": "off"
+        "no-param-reassign": "off",
+        "no-unused-vars": "off"
     }
 };
