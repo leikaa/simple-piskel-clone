@@ -60,7 +60,7 @@ window.onload = () => {
     });
   });
 
-  document.querySelectorAll('.work-area-left-panel-block-tools__item').forEach((value) => {
+  document.querySelectorAll('.work-area-left-panel-block-tools__item:not(.disabled)').forEach((value) => {
     value.addEventListener('click', function onToolsItemClick() {
       tool = changeToolOnClick(this);
     });

@@ -394,3 +394,13 @@ body {
   height: 1px;
   overflow: hidden;
 }
+
+.disabled {
+  opacity: 0.4;
+}
+
+.disabled:hover {
+  opacity: 0.4;
+  background-color: #3a3a3a;
+  cursor: initial;
+}

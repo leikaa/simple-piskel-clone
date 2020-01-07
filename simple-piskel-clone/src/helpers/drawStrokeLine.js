@@ -33,6 +33,7 @@ export const stopDrawStroke = (e, ctx, columns, mouseCoords, canvasResizeCoeffic
 
   ctx.lineWidth = pixelSize;
   ctx.lineTo(mouseCoords.x * pixelSize, mouseCoords.y * pixelSize);
+  ctx.strokeStyle = colorToFillTemplate;
   ctx.stroke();
   ctx.closePath();
 };
