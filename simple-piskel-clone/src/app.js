@@ -38,7 +38,7 @@ window.onload = () => {
   let colorToFillTemplate = colorSet.lmb;
 
   // set initial canvas grid
-  columns = setInitialCanvasGrid(columns, colorSet.lmb, pixelSize, canvasFrameSize);
+  columns = setInitialCanvasGrid(columns, defaultColor, pixelSize, canvasFrameSize);
 
   // get main canvas size according to window resize and choosen frame size options
   let currentCanvasResizedSize = getCanvasSize();
@@ -134,6 +134,21 @@ window.onload = () => {
       const currentPixelColor = getPixelColor(e, ctx, mouseCoords, defaultColor, canvasResizeCoefficient);
       colorSet.lmb = currentPixelColor;
       document.querySelector('.js-lmb').style.setProperty('background-color', currentPixelColor);
+    }
+    if (tool === 'bucket-all') {
+      // TODO скорректировать формирование карты пикселей для канваса при отрисовке
+      // let colorToFill = getPixelColor(e, ctx, mouseCoords, defaultColor, canvasResizeCoefficient);
+      // let fillCoefficient = canvasFrameSize / canvasSize;
+      //
+      // columns.forEach((row, i) => {
+      //   row.forEach((currentPixelColor, j) => {
+      //     if (currentPixelColor === colorToFill) {
+      //       ctx.fillStyle = colorToFillTemplate;
+      //       ctx.fillRect(i * pixelSize * fillCoefficient, j * pixelSize * fillCoefficient, pixelSize * fillCoefficient, pixelSize * fillCoefficient);
+      //       columns[i][j] = colorToFillTemplate;
+      //     }
+      //   });
+      // });
     }
     if (tool === 'eraser') {
       clearPixel(e);
