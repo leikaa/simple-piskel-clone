@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700&display=swap">
+  <link rel="stylesheet" href="./style.css">
+  <script type="text/javascript" src="./polyfill.js"></script>
+  <script type="text/javascript" src="./main.js"></script>
+  <title>Simple-piskel-clone</title>
+</head>
+<body>
+<div class="wrapper">
+  <div class="top-menu">
+    <a href="https://www.piskelapp.com/" class="top-menu__title">Piskel</a>
+    <div class="top-menu__filename">New Piskel*</div>
+    <div class="top-menu__buttons">
+      <div class="top-menu__sprite btn-menu">Clear session</div>
+      <div class="top-menu__sign btn-menu">Sign In</div>
+    </div>
+  </div>
+  <div class="work-area">
+    <div class="work-area-left-panel-block">
+      <ul class="work-area-left-panel-block-size">
+        <li class="work-area-left-panel-block-size__item selected" data-size="1"></li>
+        <li class="work-area-left-panel-block-size__item" data-size="2"></li>
+        <li class="work-area-left-panel-block-size__item" data-size="3"></li>
+        <li class="work-area-left-panel-block-size__item" data-size="4"></li>
+      </ul>
+      <ul class="work-area-left-panel-block-tools">
+        <li class="work-area-left-panel-block-tools__item selected" data-tool="pencil" data-tip="Pencil"></li>
+        <li class="work-area-left-panel-block-tools__item" data-tool="stroke" data-tip="Stroke"></li>
+        <li class="work-area-left-panel-block-tools__item disabled" data-tool="bucket" data-tip="Paint bucket"></li>
+        <li class="work-area-left-panel-block-tools__item disabled" data-tool="bucket-all" data-tip="Paint bucket-all"></li>
+        <li class="work-area-left-panel-block-tools__item" data-tool="eraser" data-tip="Eraser"></li>
+        <li class="work-area-left-panel-block-tools__item" data-tool="picker" data-tip="Choose color"></li>
+      </ul>
+      <ul class="work-area-left-panel-block-colors">
+        <li class="work-area-left-panel-block-colors__item js-lmb" data-tip="Primary color" data-button="lmb"></li>
+        <li class="work-area-left-panel-block-colors__item js-rmb" data-tip="Secondary color" data-button="rmb"></li>
+        <li class="work-area-left-panel-block-colors__swap-item js-swap" data-tip="Swap colors"></li>
+      </ul>
+      <input type="color" tabindex="-1" class="hidden js-lmb-color-picker">
+      <input type="color" tabindex="-1" class="hidden js-rmb-color-picker">
+    </div>
+    <div class="work-area-left-frame-block">
+      <ul class="work-area-left-frame-block-list">
+        <li class="work-area-left-frame-block-list__item"></li>
+      </ul>
+      <div class="work-area-left-frame-block__add-frame disabled">Add new frame</div>
+    </div>
+    <div class="work-area-canvas-block">
+      <div class="work-area-canvas-block__canvas-wrapper">
+        <canvas class="work-area-canvas-block__canvas" width="128" height="128"></canvas>
+      </div>
+    </div>
+    <div class="work-area-right-block">
+      <div class="work-area-right-block__canvas-wrapper">
+        <canvas class="work-area-right-block__canvas" width="200" height="200"></canvas>
+      </div>
+      <div class="work-area-right-block__resize">
+        <div class="work-area-right-block__resize-title">Resize canvas content</div>
+        <div class="work-area-right-block__resize-btns">
+          <div class="work-area-right-block__resize-btns-item btn-content selected" data-size="32">32x32</div>
+          <div class="work-area-right-block__resize-btns-item btn-content" data-size="64">64x64</div>
+          <div class="work-area-right-block__resize-btns-item btn-content" data-size="128">128x128</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
