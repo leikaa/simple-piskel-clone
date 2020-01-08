@@ -74,11 +74,11 @@ window.onload = () => {
   });
 
   // add additional frames
-  document.querySelector('.js-add-frame').addEventListener('click', () => {
-    const liAdditionalFrame = document.createElement('li');
-    liAdditionalFrame.className = 'work-area-left-frame-block-list__item';
-    ulFrameList.appendChild(liAdditionalFrame);
-  });
+  // document.querySelector('.js-add-frame').addEventListener('click', () => {
+  //   const liAdditionalFrame = document.createElement('li');
+  //   liAdditionalFrame.className = 'work-area-left-frame-block-list__item';
+  //   ulFrameList.appendChild(liAdditionalFrame);
+  // });
 
   // colors section
   document.querySelector('.js-lmb').addEventListener('click', function onColorItemClick() {
